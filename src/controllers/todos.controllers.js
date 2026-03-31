@@ -2,8 +2,22 @@ import * as todosService from "../services/todos.services.js"
 
 export const getTodos = async (req, res, next) => {
 	try {
-		const todos = await todosService.getAllTodos()
+		const todos = await todosService.getAllTodos(req.query)
 		res.json(todos)
+	} catch (error) {
+		next(error)
+	}
+}
+
+export const uploadTodosImage = async (req, res, next) => {
+	try {
+		const file = req.file
+
+		res.json({
+			message: "File uploaded",
+			filename: file.filename,
+			path: file.path,
+		})
 	} catch (error) {
 		next(error)
 	}

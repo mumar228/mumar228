@@ -1,7 +1,20 @@
 import * as todosRepository from "../repositories/todos.repositories.js"
 
-export const getAllTodos = async () => {
-	return todosRepository.findAllTodos()
+export const getAllTodos = async (query) => {
+	const filters = {}
+
+	if (query.title) {
+		filters.title = query.title
+	}
+
+	if (query.description) {
+		filters.description = query.description
+	}
+
+	const page = parseInt(query.page, 10) || 1
+	const limit = parseInt(query.limit, 10) || 10
+
+	return todosRepository.findAllTodos(filters, page, limit)
 }
 
 export const getTodoById = async (id) => {
@@ -15,7 +28,6 @@ export const getTodoById = async (id) => {
 
 	return todo
 }
-
 export const createTodo = async (data) => {
 	const { title, description, completed } = data
 

@@ -1,7 +1,9 @@
 import Todo from "../models/todos.models.js"
 
-export const findAllTodos = async () => {
-	return Todo.find()
+export const findAllTodos = async (filter,page,limit) => {
+	const skip = (page - 1) * limit
+	
+	return Todo.find(filter).skip(skip).limit(limit)
 }
 
 export const findTodoById = async (id) => {

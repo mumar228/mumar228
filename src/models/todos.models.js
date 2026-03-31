@@ -16,6 +16,9 @@ const todoSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		userImage: {
+			type: String,
+		}
 	},
 	{
 		timestamps: true,
