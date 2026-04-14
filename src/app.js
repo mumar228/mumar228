@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import { connectDB } from "./config/db.js"
 import todosRoutes from "./routes/todos.routes.js"
 import userRoutes from "./routes/user.routes.js"
+import NoteRoutes from "./routes/note.routes.js"
+import AdminRoutes from "./routes/admin.routes.js"
 
 dotenv.config()
 
@@ -11,7 +13,10 @@ const app = express()
 app.use(express.json())
 app.use("/todos", todosRoutes)
 app.use("/users", userRoutes)
-
+app.use("/register", userRoutes)
+app.use("/login", userRoutes)
+app.use("/notes", NoteRoutes)
+app.use("/admins", AdminRoutes)
 app.use("/uploads", express.static("uploads"))
 
 
