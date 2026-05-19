@@ -1,10 +1,11 @@
 import express from "express"
 import dotenv from "dotenv"
-import { connectDB } from "./config/db.js"
+import { pool } from "./config/db.js";
+import { AppDataSource } from "./config/data-source.js";
 import todosRoutes from "./routes/todos.routes.js"
 import userRoutes from "./routes/user.routes.js"
-import NoteRoutes from "./routes/note.routes.js"
-import AdminRoutes from "./routes/admin.routes.js"
+// import NoteRoutes from "./routes/note.routes.js"
+// import AdminRoutes from "./routes/admin.routes.js"
 
 dotenv.config()
 
@@ -15,27 +16,20 @@ app.use("/todos", todosRoutes)
 app.use("/users", userRoutes)
 app.use("/register", userRoutes)
 app.use("/login", userRoutes)
-app.use("/notes", NoteRoutes)
-app.use("/admins", AdminRoutes)
-app.use("/uploads", express.static("uploads"))
+// app.use("/notes", NoteRoutes)
+// app.use("/admins", AdminRoutes)
+// app.use("/uploads", express.static("uploads"))
 
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).json({
+    message: err.message || "Internal Server Error",
+  });
+});
 
-app.use((err, _req, res, _next) => {
-	const statusCode = err.statusCode || 500
-	res.status(statusCode).json({
-		error: err.message || "Internal server error"
-	})
-})
+await AppDataSource.initialize();
+console.log("Postgres TypeORM orqali ulandi");
+const PORT = process.env.PORT || 3000;
 
-
-const PORT = process.env.PORT || 3000
-
-const startServer = async () => {
-	await connectDB()
-
-	app.listen(PORT, () => {
-		console.log(`Server running on port ${PORT}`)
-	})
-}
-
-startServer()
+app.listen(PORT, () => {
+	console.log(`Server running on port ${PORT}`);
+});

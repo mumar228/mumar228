@@ -1,32 +1,24 @@
-import User from "../models/user.models.js"
-import Todos from "../models/todos.models.js"
+import { AppDataSource } from "../config/data-source.js";
+import { UserEntity } from "../models/user.entity.js";
 
-export const findAllUsers = async (filters, page, limit) => {
-	const skip = (page - 1) * limit
+const userRepo = AppDataSource.getRepository(UserEntity);
 
-	return User.find(filters).skip(skip).limit(limit)
-}
+export const findAllUsers = async () => {
+  return userRepo.find({ order: { id: "DESC" } });
+};
 
 export const findUserById = async (id) => {
-	return User.findById(id)
-}
+  return userRepo.findOneBy({ id });
+};
 
-export const findAllTodos = async (id) => {
-	return Todos.findById(id)
-}
-
-export const findUserByUsername = async (username) => {
-  return User.findOne({ username })
-}
-
-export const findUserByEmail = async (email) => {
-	return User.findOne({ email })
-}
-
-export const createUser = async (data) => {
-	return User.create(data)
-}
+export const createUser = async ({ name, email, age, password, role }) => {
+  const user = userRepo.create({ name, email, age, password, role });
+  return userRepo.save(user);
+};
 
 export const deleteUserById = async (id) => {
-	return User.findByIdAndDelete(id)
-}
+  const user = await userRepo.findOneBy({ id });
+  if (!user) return null;
+  await userRepo.remove(user);
+  return user;
+};
