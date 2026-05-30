@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/", getTodos);
 router.get("/:id", getTodo);
-router.post("/", validate(createTodoSchema), createTodo);
+router.post("/:id", validate(createTodoSchema), createTodo);
 router.delete("/:id", deleteTodo);
 
 export default router;

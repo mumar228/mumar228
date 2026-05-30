@@ -1,4 +1,6 @@
+import { AppDataSource } from "../config/data-source.js"; // O'zingizning dataSource faylingiz yo'lini yozing
 import * as todosService from "../services/todos.services.js";
+import { TodoEntity } from "../models/todos.entity.js";
 
 export const getTodos = async (req, res, next) => {
 	try {
@@ -18,15 +20,15 @@ export const getTodo = async (req, res, next) => {
 	}
 };
 
-export const createTodo = async (req, res, next) => {
-	try {
-		const todo = await todosService.createTodo(req.body);
-		res.status(201).json(todo);
-	} catch (error) {
-		next(error);
-	}
-};
 
+export const createTodo = async (data) => {
+  const todoRepository = AppDataSource.getRepository(TodoEntity);
+  
+  const todo = todoRepository.create(data);
+  const savedTodo = await todoRepository.save(todo);
+
+  return savedTodo.id
+}
 export const deleteTodo = async (req, res, next) => {
 	try {
 		const todo = await todosService.deleteTodo(Number(req.params.id));
@@ -38,3 +40,5 @@ export const deleteTodo = async (req, res, next) => {
 		next(error);
 	}
 };
+
+

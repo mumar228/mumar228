@@ -7,7 +7,7 @@ export const UserEntity = new EntitySchema({
     id: {
       type: "int",
       primary: true,
-      generated: true, // avtomatik o'suvchi PK
+      generated: true,
     },
     name: {
       type: "varchar",
@@ -34,8 +34,18 @@ export const UserEntity = new EntitySchema({
     },
     role: {
       type: "varchar",
-      length: 20,
+      enum: ['user', 'admin'],
       default: "user",
+      nullable: false
+    },
+    refreshToken: {
+      type: "varchar",
+      nullable: true, 
+    },
+    telegramChatId: {
+      type: "bigint",
+      nullable: true,
+      unique: true,
     },
     createdAt: {
       type: "timestamp",

@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import { TodoEntity } from "../models/todos.entity.js";
+import { UserEntity } from "../models/user.entity.js";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
@@ -14,6 +15,6 @@ export const AppDataSource = new DataSource({
   // synchronize: entitylar asosida jadvallarni avtomatik yaratadi/yangilaydi.
   // O'rganish uchun ZO'R, productionda ASLO ishlatmang — migratsiyalardan foydalaning.
   synchronize: true,
-  logging: true, // TypeORM bajarayotgan SQL ni ko'rsatadi — darsda foydali
-  entities: [TodoEntity],
+  logging: true,
+  entities: [TodoEntity, UserEntity],
 });

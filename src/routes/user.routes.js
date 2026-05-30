@@ -3,13 +3,14 @@ import { validate } from "../middleware/validators.middleware.js"
 import { createUserSchema, registerSchema, loginSchema } from "../validators/users.validator.js"
 import {
   getUsers,
-  getUser,
+  // getUser,
   createUser,
   deleteUser,
-  uploadUserImage,
+  // uploadUserImage,
   login,
   register,
-  getAllTodos
+  refresh,
+  // getTodos
 } from "../controllers/user.controllers.js"
 
 import { upload } from "../middleware/upload.middleware.js"
@@ -17,11 +18,12 @@ import { upload } from "../middleware/upload.middleware.js"
 const router = Router()
 
 router.get("/", getUsers)
-router.get("/todos", getAllTodos)
+// router.get("/todo", getTodos)
+router.post("/refresh", refresh);
 router.post("/", validate(createUserSchema), createUser)
-router.post("/upload", upload.single("image"), uploadUserImage)
+// router.post("/upload", upload.single("image"), uploadUserImage)
 router.post("/register", validate(registerSchema), register)
 router.post("/login", validate(loginSchema), login)
-router.get("/:id", getUser)
+// router.get("/:id", getUser)
 router.delete("/:id", deleteUser)
 export default router;

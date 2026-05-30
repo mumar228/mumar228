@@ -1,5 +1,69 @@
 import * as userService from "../services/user.services.js";
 
+export const getUsers = async (req, res, next) => {
+	try {
+		const users = await userService.getUsers();
+		res.json(users);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const getUser = async (req, res, next) => {
+	try {
+		const user = await userService.getUser(Number(req.params.id));
+		res.json(user);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const createUser = async (req, res, next) => {
+	try {
+		const user = await userService.createUser(req.body);
+		res.status(201).json(user);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const deleteUser = async (req, res, next) => {
+	try {
+		const user = await userService.deleteUser(Number(req.params.id));
+		res.json({
+			message: "User deleted",
+			user,
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+export const refreshToken = async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    const result = await authService.refresh(refreshToken);
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+  }
+};
+export const refresh = async (req, res) => {
+  try {
+    const { refreshToken } = req.body; 
+    if (!refreshToken) {
+      return res.status(400).json({ message: "Refresh token talab qilinadi" });
+    }
+
+    const result = await userService.refresh(refreshToken);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(401).json({ message: error.message });
+  }
+};
+
 export const register = async (req, res, next) => {
 	try {
 		const result = await userService.register(req.body)
@@ -16,69 +80,4 @@ export const login = async (req, res, next) => {
 	} catch (error) {
 		next(error)
 	}
-}
-export const getUsers = async (req, res, next) => {
-  try {
-    const users = await userService.getAllUsers(req.query);
-    res.json(users);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const uploadUserImage = async (req, res, next) => {
-  try {
-    const file = req.file;
-
-    res.json({
-      message: "File uploaded",
-      filename: file.filename,
-      path: file.path,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getUser = async (req, res, next) => {
-  try {
-    const user = await userService.getUserById(req.params.id);
-    res.json(user);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getAllTodos = async (req, res, next) => {
-  try {
-    const todos = await userService.getAllTodos(req.query);
-    res.json(todos);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const createUser = async (req, res, next) => {
-  try {
-    const user = await userService.createUser(req.body);
-    res.status(201).json(user);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const deleteUser = async (req, res, next) => {
-  try {
-    const deletedUser = await userService.deleteUser(req.params.id);
-
-    res.json({
-      message: "User deleted",
-      user: deletedUser,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-export const getProfile = (req, res) => {
-	res.json(req.user)
 }

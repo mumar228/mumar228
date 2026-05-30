@@ -28,4 +28,12 @@ export const TodoEntity = new EntitySchema({
       updateDate: true,
     },
   },
+  relations: {
+    user: {
+      type: "many-to-one",
+      target: "User",
+      joinColumn: true,
+      onDelete: "CASCADE",    
+    },
+  },
 });

@@ -1,24 +1,19 @@
-import express from "express"
-import dotenv from "dotenv"
-import { pool } from "./config/db.js";
+import express from "express";
+import dotenv from "dotenv";
+import todoRoutes from "./routes/todos.routes.js";
+import userRotes from "./routes/user.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 import { AppDataSource } from "./config/data-source.js";
-import todosRoutes from "./routes/todos.routes.js"
-import userRoutes from "./routes/user.routes.js"
-// import NoteRoutes from "./routes/note.routes.js"
-// import AdminRoutes from "./routes/admin.routes.js"
+import { startBot } from "./bot/bot.js";
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
-
-app.use(express.json())
-app.use("/todos", todosRoutes)
-app.use("/users", userRoutes)
-app.use("/register", userRoutes)
-app.use("/login", userRoutes)
-// app.use("/notes", NoteRoutes)
-// app.use("/admins", AdminRoutes)
-// app.use("/uploads", express.static("uploads"))
+const app = express();
+app.use(express.json());
+app.use("/todos", todoRoutes);
+app.use("/user", userRotes);
+app.use("/admin", adminRoutes);
+app.use("/uploads", express.static("uploads"));
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
@@ -26,10 +21,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-await AppDataSource.initialize();
-console.log("Postgres TypeORM orqali ulandi");
-const PORT = process.env.PORT || 3000;
+startBot()
 
-app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
-});
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Postgres TypeORM orqali ulandi");
+    app.listen(PORT, () => {
+      console.log(`Server ${PORT} portda ishlamoqda`);
+    });
+  })
+  .catch((err) => {
+    console.error("DB ulanishda xato ❌", err);
+    process.exit(1); 
+  });
+
+const PORT = process.env.PORT || 3000;
