@@ -1,0 +1,86 @@
+.create-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-card {
+  background-color: #1e1e22;
+  border: 1px solid #2e2e35;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.create-card h2 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-form label {
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.create-form input {
+  background-color: #28282f;
+  border: 1px solid #3a3a44;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  width: 100%;
+  transition: border 0.2s;
+}
+
+.create-form input::placeholder {
+  color: #555;
+}
+
+.create-form input:focus {
+  border-color: #6c63ff;
+}
+
+.create-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+
+.create-btn:hover {
+  background-color: #574fd6;
+}
+
+.create-btn:active {
+  transform: scale(0.98);
+}
+
+.create-message {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #6c63ff;
+}
