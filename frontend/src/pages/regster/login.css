@@ -35,7 +35,6 @@
   margin-bottom: 28px;
 }
 
-/* Input group */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -62,7 +61,6 @@
   border-color: #6c63ff;
 }
 
-/* Button */
 .login-btn {
   width: 100%;
   padding: 14px;
@@ -84,7 +82,6 @@
   transform: scale(0.98);
 }
 
-/* Message */
 .message {
   margin-top: 16px;
   text-align: center;
@@ -92,7 +89,6 @@
   color: #6c63ff;
 }
 
-/* Register link */
 .register-link {
   margin-top: 20px;
   text-align: center;

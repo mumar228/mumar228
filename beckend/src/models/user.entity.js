@@ -30,7 +30,7 @@ export const UserEntity = new EntitySchema({
     },
     password: {
       type: "varchar",
-      nullable: false,
+      nullable: true,
     },
     role: {
       type: "varchar",
