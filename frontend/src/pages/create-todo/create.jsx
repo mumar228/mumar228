@@ -23,7 +23,7 @@ function CreateTodo() {
       const token = localStorage.getItem("token"); // ← qo'shildi
 
       const response = await axios.post(
-        "https://mumar228.onrender.com/api/todos",
+        "https://mumar228.onrender.com/todos",
         {
           title: taskTitle,
           description: taskDescription,
