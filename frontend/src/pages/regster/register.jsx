@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./register.css"
 import { useNavigate } from "react-router-dom";
-
 function Register() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -21,7 +20,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://mumar228.onrender.com/api/user/register", {
+      const response = await axios.post("https://mumar228.onrender.com/user/register", {
         ...form,
         age: Number(form.age),
       });
@@ -32,7 +31,6 @@ function Register() {
       setMessage(error.response?.data?.message || "Xatolik yuz berdi ❌");
     }
   };
-
   return (
     <div className="register-wrapper">
       <div className="register-card">

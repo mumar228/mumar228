@@ -26,7 +26,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-startBot();
+// startBot();
 
 AppDataSource.initialize()
   .then(() => {

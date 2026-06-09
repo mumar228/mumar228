@@ -3,7 +3,6 @@ import axios from "axios";
 import todoImg from "../../img/img_todo.png";
 import logo from "../../img/logo1.jpg";
 import { Link } from 'react-router-dom';
-
 function MyTodos() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,9 +11,7 @@ function MyTodos() {
     const fetchTodos = async () => {
       try {
         const token = localStorage.getItem("token");
-        
-        // 🟢 O'ZGARTIRILGAN JOY: Endi vazifalar ro'yxati Render-dagi PostgreSQL bazangizdan keladi
-        const response = await axios.get("https://mumar228.onrender.com/api/todos", {
+        const response = await axios.get("https://mumar228.onrender.com/todos", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTodos(response.data);
@@ -52,7 +49,7 @@ function MyTodos() {
         </div>
     </header>
     
-    <div style={{ padding: "40px", maxWidth: "600px", margin: "60px auto", color: "white" }}>
+    <div style={{ padding: "40px", maxWidth: "600px", margin: "60px auto",color:"white" }}>
       <h2>Mening vazifalarim</h2>
       {todos.length === 0 ? (
         <p>Hali vazifa qo'shilmagan!</p>
@@ -65,7 +62,7 @@ function MyTodos() {
             borderRadius: "8px",
             backgroundColor: "#fff"
           }}>
-            <h3 style={{ margin: "0 0 8px", color: "black" }}>{todo.title}</h3>
+            <h3 style={{ margin: "0 0 8px" }}>{todo.title}</h3>
             <p style={{ margin: 0, color: "#64748b" }}>{todo.description}</p>
           </div>
         ))
