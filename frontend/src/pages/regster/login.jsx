@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
+
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
@@ -12,7 +13,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/user/login", form);
+      // 🟢 O'ZGARTIRILGAN JOY: Endi so'rov Render-dagi jonli serverga to'liq ketadi
+      const response = await axios.post("https://mumar228.onrender.com/api/user/login", form);
       const { token, refreshToken, user } = response.data;
 
       localStorage.setItem("token", token);

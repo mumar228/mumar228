@@ -1,8 +1,8 @@
 import React from "react";
 import "./about.css"
 import { Link } from "react-router-dom";
-import todoImg from "../../img/img_todo.png"; // Fayl nomini to'g'rilaymiz
-import logo from "../../img/logo1.png"; // Fayl nomini to'g'rilaymiz
+import todoImg from "../../img/img_todo.png";
+import logo from "../../img/logo1.jpg"; 
 const about = () => {
   return (
     <div>
@@ -15,7 +15,7 @@ const about = () => {
               <Link className="list-link" to="/">Home</Link>
               <Link className="list-link" to="/about">About</Link>
               <Link className="list-link" to="/create">Create todo</Link>
-              <Link className="list-link" to="/my-todo">my todo</Link>
+              <Link className="list-link" to="/my-todos">my todo</Link>
             </nav>
 
             <div className="btn">

@@ -2,7 +2,7 @@ import React from "react";
 import "./homePage.css";
 import { Link } from "react-router-dom";
 import todoImg from "../../img/img_todo.png"; 
-import logo from "../../img/logo1.png";  
+import logo from "../../img/logo1.jpg";  
 const Navbar = () => {
   return (
     <div>
@@ -15,12 +15,12 @@ const Navbar = () => {
               <Link className="list-link" to="/">Home</Link>
               <Link className="list-link" to="/about">About</Link>
               <Link className="list-link" to="/create">Create todo</Link>
-              <Link className="list-link" to="/my-todo">my todo</Link>
+              <Link className="list-link" to="/my-todos">my todo</Link>
             </nav>
 
             <div className="btn">
-              <button className="btn1">Login</button>
-              <button className="btn2">register</button>
+              <Link className="btn1" to="/login">Login</Link>
+              <Link className="btn2" to="/register">register</Link>
             </div>
           </div>
         </div>
