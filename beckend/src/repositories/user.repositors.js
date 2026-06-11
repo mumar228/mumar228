@@ -18,7 +18,7 @@ export const findUserByEmail = async (email) => {
 
 export const createUser = async ({ name, email, age, password, role }) => {
   const user = userRepo.create({ name, email, age, password, role });
-  return userRepo.save(user); // INSERT ... RETURNING *
+  return userRepo.save(user);
 };
 
 export const deleteUserById = async (id) => {
