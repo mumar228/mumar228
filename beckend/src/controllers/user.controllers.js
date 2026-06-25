@@ -65,24 +65,12 @@ export const refresh = async (req, res) => {
 };
 
 export const register = async (req, res, next) => {
-try {
-    console.log("🔍 Request body:", req.body)
-    console.log("🔍 Headers:", req.headers)
-    
-    const result = await userService.register(req.body)
-    console.log("✅ Register success:", result)
-    
-    res.status(201).json(result)
-  } catch (error) {
-    console.error("❌ Register error:", error)
-    console.error("❌ Error stack:", error.stack)
-    
-    // Xatolikni batafsil yuborish
-    res.status(500).json({ 
-      error: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-    })
-  }
+	try {
+		const result = await userService.register(req.body)
+		res.status(201).json(result)
+	} catch (error) {
+		next(error)
+	}
 }
 
 export const login = async (req, res, next) => {
